@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Home</title>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Bootstrap core CSS -->
+	<link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link th:href="@{/css/mdb.css}" rel="stylesheet">
+	<!-- Your custom styles (optional) -->
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+	<style>
+	.profile .container-login100 {
+		padding: 0px;
+	}
+	.profile .input100 {
+		border-bottom: none;
+	}
+	.mt-20 {
+		margin-top: 20px;.
+	}
+	/* The switch - the box around the slider */
+	.switch {
+	  position: relative;
+	  display: inline-block;
+	  width: 60px;
+	  height: 34px;
+	}
+	
+	/* Hide default HTML checkbox */
+	.switch input {display:none;}
+	
+	/* The slider */
+	.slider {
+	  position: absolute;
+	  cursor: pointer;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background-color: #ccc;
+	  -webkit-transition: .4s;
+	  transition: .4s;
+	}
+	
+	.slider:before {
+	  position: absolute;
+	  content: "";
+	  height: 26px;
+	  width: 26px;
+	  left: 4px;
+	  bottom: 4px;
+	  background-color: white;
+	  -webkit-transition: .4s;
+	  transition: .4s;
+	}
+	
+	input:checked + .slider {
+	  background-color: #2196F3;
+	}
+	
+	input:focus + .slider {
+	  box-shadow: 0 0 1px #2196F3;
+	}
+	
+	input:checked + .slider:before {
+	  -webkit-transform: translateX(26px);
+	  -ms-transform: translateX(26px);
+	  transform: translateX(26px);
+	}
+	
+	/* Rounded sliders */
+	.slider.round {
+	  border-radius: 34px;
+	}
+	
+	.slider.round:before {
+	  border-radius: 50%;
+	}
+	</style>
+</head>
+
+<body class="fixed-sn light-blue-skin profile">
+<!-- <map key="AIzaSyAky5ZG7VrHWV52fizmdiKorq2_GaH6tCE"/> -->
+	<!--Main Navigation-->
+	<header>
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark double-nav fixed-top bg-red scrolling-navbar">
+			<a class="navbar-brand" href="#"><strong>Blood Bank</strong></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<form th:action="@{/admin/profile}">
+							<button class="nav-link" name="registration" type="Submit">Profile <span class="sr-only">(current)</span></button>
+						</form>
+					</li>
+					<li class="nav-item">
+						<form th:action="@{/admin/request}">
+							<button class="nav-link" name="registration" type="Submit">Request</button>
+						</form>
+					</li>
+					<li class="nav-item">
+						<form th:action="@{/admin/map}">
+							<button class="nav-link" name="registration" type="Submit">Map </button>
+						</form>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">History</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav nav-flex-icons">
+				    <li class="nav-item">
+				    	<a class="nav-link"><i class="fa fa-facebook"></i></a>
+				    </li>
+				    <li class="nav-item">
+				    	<a class="nav-link"><i class="fa fa-twitter"></i></a>
+				    </li>
+				    <li class="nav-item">
+				    	<a class="nav-link"><i class="fa fa-instagram"></i></a>
+				    </li>
+				    <li class="nav-item">
+				    	<form th:action="@{/logout}" method="get">
+							<button class="nav-link" name="registration" type="Submit">Logout</button>
+						</form>
+				    </li>
+				    
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!--Main Navigation-->
+	
+	<!--Main layout-->
+	<main>
+		<div class="container-fluid mt-70">
+	   		<!--Section: Features v.1-->
+	   		<section class="section feature-box">
+				<!--Section description-->
+				<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+					<div class="wrap-login100 mt-20">
+						<form autocomplete="off" action="#" th:action="@{/admin/profile}" th:object="${user}" method="post" class="login100-form validate-form" role="form">
+							<span class="login100-form-logo">
+								<i class="zmdi zmdi-landscape"></i>
+							</span>
+							
+							<label class="validation-message text-center mb-15" th:utext="${successMessage}"></label>
+		
+							<label th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="validation-message mb-15"></label>
+							<div class="wrap-input100 validate-input" data-validate = "Enter a valid age">
+								<input type="text" id="age" name="age" th:field="*{age}" th:placeholder="Age" class="input100" />
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div>
+							
+							<label th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="validation-message mb-15"></label>
+							<div class="wrap-input100 validate-input" data-validate = "Select a valid gender">
+								<select class="input100" th:field="*{gender}" style="width:100%;">
+								    <option class="dropdown-item" value="Male">Male</option>
+					                <option class="dropdown-item" value="Female">Female</option>
+					                <option class="dropdown-item" value="Others">Others</option>
+								</select>
+							</div>
+							
+							<label th:if="${#fields.hasErrors('bloodType')}" th:errors="*{bloodType}" class="validation-message mb-15"></label>
+							<div class="wrap-input100 validate-input" data-validate = "Select a valid blood type">
+						        <select class="input100" th:field="*{bloodType}" style="width:100%;">
+								    <option class="dropdown-item" value="O+">O+</option>
+					                <option class="dropdown-item" value="A+">A+</option>
+					                <option class="dropdown-item" value="B+">B+</option>
+					                <option class="dropdown-item" value="AB+">AB+</option>
+					                <option class="dropdown-item" value="O-">O-</option>
+					                <option class="dropdown-item" value="A-">A-</option>
+					                <option class="dropdown-item" value="B-">B-</option>
+					                <option class="dropdown-item" value="AB-">AB-</option>
+								</select>
+						        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div>
+							
+							<label th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="validation-message mb-15"></label>
+							<div id="locationField" class="wrap-input100 validate-input" data-validate = "Enter a valid location">
+								<input type="text" id="autocomplete" name="location" th:field="*{location}" placeholder="Location" class="input100" />
+								<input type="hidden" id="longitude" name="longitude" th:field="*{longitude}" />
+								<input type="hidden" id="latitude" name="latitude" th:field="*{latitude}" />
+								
+								<input type="hidden" id="id" name="id" th:field="*{id}" value="*{id}"/>
+								<input type="hidden" id="active" name="active" th:field="*{active}" value="*{active}"/>
+								<input type="hidden" id="email" name="email" th:field="*{email}" value="*{email}"/>
+								<input type="hidden" id="password" name="password" th:field="*{password}" value="*{password}"/>
+								<input type="hidden" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" value="12345"/>
+								<input type="hidden" id="name" name="name" th:field="*{name}" value="*{name}"/>
+								<input type="hidden" id="contactNo" name="contactNo" th:field="*{contactNo}" value="*{contactNo}"/>
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+								<label class="switch">
+								  <!-- <input type="checkbox" id="available" name="available" th:field="*{available}" value="*{available}"> -->
+								  <span class="slider round"></span>
+								</label>
+							</div>
+							
+							<div class="container-login100-form-btn">
+								<button class="login100-form-btn" type="Submit">
+									Save
+								</button>
+							</div>
+							<!--Grid row-->
+							<div class="row features-big">
+								<div id="map"></div>
+								<script type="text/javascript" th:src="@{/js/script.js}"></script>
+								<script async defer th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyA9CTKCq3Xc0Jwmm7lLEN7LVF_oczM_rmo&libraries=places&callback=initAutocomplete}"></script>
+							</div>
+							<!--Grid row-->
+						</form>
+					</div>
+				</div>
+			</section>
+			<!--Section: Features v.1-->
+		</div>
+	</main>
+	<!--Main layout-->
+
+	<!--Footer-->
+	<footer class="page-footer center-on-small-only">
+		<!--Copyright-->
+		<div class="footer-copyright">
+			<div class="container-fluid bg-red">
+				© 2018 Copyright: <a href="#"> Blood Bank </a>
+			</div>
+		</div>
+		<!--/.Copyright-->
+	</footer>
+	<!--/.Footer-->
+
+	<!-- SCRIPTS -->
+	<!-- JQuery -->
+	<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/vendor/select2/select2.min.js}"></script>
+	<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+	<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+	<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+	    $.ajax({
+	        type : 'POST',
+	        url : '/admin/users',
+	        dataType : 'json',
+	        contentType : 'application/json',
+	        success : function(data) {
+	        	localStorage.setItem("users", JSON.stringify(data));
+	        	currentUsers = data;
+	        	console.log(data);
+	        },
+	        error : function() {
+	            alert('error');
+	        }
+	    });
+	});
+	</script>
+   
+</body>
+</html>

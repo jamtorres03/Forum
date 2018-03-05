@@ -1,11 +1,7 @@
 package com.forum.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,13 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.forum.model.Request;
+import com.forum.model.Topic;
 import com.forum.model.User;
-import com.forum.model.UserModel;
-import com.forum.service.RequestService;
 import com.forum.service.UserService;
 
 @Controller
@@ -28,16 +21,13 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private RequestService requestService;
-
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getName() + " ("
+		modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " ("
 				+ user.getEmail() + ")");
 		modelAndView.addObject("adminMessage",
 				"Content Available Only for Users with Admin Role");
@@ -82,13 +72,13 @@ public class HomeController {
 	@RequestMapping(value = "/admin/request", method = RequestMethod.GET)
 	public ModelAndView request() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("request", new Request());
+		modelAndView.addObject("request", new Topic());
 		modelAndView.setViewName("admin/request");
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/request", method = RequestMethod.POST)
-	public ModelAndView addRequest(@Valid Request request,
+	/*@RequestMapping(value = "/admin/request", method = RequestMethod.POST)
+	public ModelAndView addRequest(@Valid Topic request,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext()
@@ -115,5 +105,5 @@ public class HomeController {
 			list.add(model);
 		}
 		return list;
-	}
+	}*/
 }

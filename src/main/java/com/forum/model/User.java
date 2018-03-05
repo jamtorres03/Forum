@@ -43,37 +43,16 @@ public class User {
 	@Transient
 	private String confirmPassword;
 	
-	@Column(name = "name")
-	@NotEmpty(message = "*Please provide your name")
-	private String name;
+	@Column(name = "first_name")
+	@NotEmpty(message = "*Please provide your first name")
+	private String firstName;
 	
-	@Column(name = "contact_no")
-	@NotEmpty(message = "*Please provide your contact number")
-	private String contactNo;
-	
-	@Column(name = "age")
-	private String age;
-	
-	@Column(name = "gender")
-	private String gender;
-	
-	@Column(name = "blood_type")
-	private String bloodType;
-	
-	@Column(name = "location")
-	private String location;
-	
-	@Column(name = "longitude")
-	private double longitude;
-	
-	@Column(name = "latitude")
-	private double latitude;
+	@Column(name = "last_name")
+	@NotEmpty(message = "*Please provide your last name")
+	private String lastName;
 	
 	@Column(name = "active")
 	private int active;
-	
-	@Column(name = "available")
-	private int available;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -111,68 +90,20 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getContactNo() {
-		return contactNo;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setContactNo(String contactNo) {
-		this.contactNo = contactNo;
-	}
-
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getBloodType() {
-		return bloodType;
-	}
-
-	public void setBloodType(String bloodType) {
-		this.bloodType = bloodType;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public int getActive() {
@@ -181,14 +112,6 @@ public class User {
 
 	public void setActive(int active) {
 		this.active = active;
-	}
-
-	public int getAvailable() {
-		return available;
-	}
-
-	public void setAvailable(int available) {
-		this.available = available;
 	}
 
 	public Set<Role> getRoles() {

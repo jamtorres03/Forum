@@ -8,7 +8,7 @@
 	
 	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<!-- <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"> -->
 </head>
 <body>
 	
@@ -40,15 +40,15 @@
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					
-					<label th:if="${#fields.hasErrors('contactNo')}" th:errors="*{contactNo}" class="validation-message mb-15"></label>
-					<div class="wrap-input100 validate-input" data-validate="Enter a valid contact number">
-						<input type="text" placeholder="Contact Number" th:field="*{contactNo}" id="contactNo" name="contactNo" class="input100" />
+					<label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message mb-15"></label>
+					<div class="wrap-input100 validate-input" data-validate="Enter a valid firstName">
+						<input type="text" placeholder="firstName" th:field="*{firstName}" id="firstName" name="firstName" class="input100" />
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 					
-					<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message mb-15"></label>
-					<div class="wrap-input100 validate-input" data-validate = "Enter a valid fullname">
-						<input type="text" id="name" name="name" th:field="*{name}" placeholder="Fullname" class="input100" />
+					<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message mb-15"></label>
+					<div class="wrap-input100 validate-input" data-validate = "Enter a valid lastName">
+						<input type="text" id="lastName" name="lastName" th:field="*{lastName}" placeholder="lastName" class="input100" />
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					

@@ -1,4 +1,4 @@
-# SpringSecurityLoginTutorial
+# 
 
 1. mvn clean
 2. mvn clean install
@@ -8,3 +8,4 @@
 - http://localhost:8080/registration
 - http://localhost:8080/login
 
+INSERT INTO `role` VALUES (1,'ADMIN');

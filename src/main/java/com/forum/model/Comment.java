@@ -1,8 +1,6 @@
 package com.forum.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,22 +8,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "topic")
-public class Topic {
+@Table(name = "comment")
+public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "topic_id")
-	private int topicId;
+	@Column(name = "comment_id")
+	private int commentId;
 	
-	@Column(name = "subject")
-	private String subject;
+	@Column(name = "content")
+	private String content;
 	
 	@Column(name = "status")
 	private int status;
@@ -37,23 +36,24 @@ public class Topic {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
-    private List<Comment> comments = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topic_id")
+    private Topic topic;
 
-	public int getTopicId() {
-		return topicId;
+	public int getCommentId() {
+		return commentId;
 	}
 
-	public void setTopicId(int topicId) {
-		this.topicId = topicId;
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
 	}
 
-	public String getSubject() {
-		return subject;
+	public String getContent() {
+		return content;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getStatus() {
@@ -80,12 +80,12 @@ public class Topic {
 		this.createdDate = createdDate;
 	}
 
-	public List<Comment> getComments() {
-		return comments;
+	public Topic getTopic() {
+		return topic;
 	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
-
+	
 }

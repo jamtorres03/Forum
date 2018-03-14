@@ -12,42 +12,90 @@
 
 <body>
 	<div class="container">
-	
+
 		<form th:action="@{/logout}" method="get">
 			<button class="btn btn-md btn-danger btn-block" name="registration"
 				type="Submit">Logout</button>
-		</form>    
-		
-		<div class="panel-group" style="margin-top:40px">
+		</form>
+
+		<div class="panel-group" style="margin-top: 40px">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<span th:utext="${userName}"></span>
 				</div>
 				<div class="panel-body">
-					<form autocomplete="off" action="#" th:action="@{/admin/topic}" th:object="${topic}" method="post" class="login100-form validate-form" role="form">
-						<span class="login100-form-logo">
-							<i class="zmdi zmdi-landscape"></i>
-						</span>
-			
-						<label class="validation-message text-center mb-15" th:utext="${successMessage}"></label>
-						
-						<label th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="validation-message mb-15"></label>
-						<div class="wrap-input100 validate-input" data-validate="Enter a valid subject">
-							<input type="text" placeholder="subject" th:field="*{subject}" id="subject" name="subject" class="input100" />
-							<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					<form autocomplete="off" action="#" th:action="@{/admin/topic}"
+						th:object="${topic}" method="post"
+						class="login100-form validate-form" role="form">
+						<span class="login100-form-logo"> <i
+							class="zmdi zmdi-landscape"></i>
+						</span> <label class="validation-message text-center mb-15"
+							th:utext="${successMessage}"></label> <label
+							th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"
+							class="validation-message mb-15"></label>
+						<div class="wrap-input100 validate-input"
+							data-validate="Enter a valid subject">
+							<input type="text" placeholder="subject" th:field="*{subject}"
+								id="subject" name="subject" class="input100" /> <span
+								class="focus-input100" data-placeholder="&#xf191;"></span>
 						</div>
-						
+
 						<div class="container-login100-form-btn">
-							<button class="login100-form-btn" type="Submit">
-								Add Topic
-							</button>
+							<button class="login100-form-btn" type="Submit">Add
+								Topic</button>
 						</div>
 					</form>
 				</div>
 				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
 			</div>
 		</div>
-		
+
+		<div class="panel-group" style="margin-top: 40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span th:utext="${userName}"></span>
+				</div>
+				<div class="panel-body">
+					<div class="container">
+						<div class="card" th:each="topic : ${topics}">
+							<div class="card-header">
+								<div class="row">
+									<div class="col">
+										<span th:text="${topic.subject}"></span>
+									</div>
+									<div class="col-md-auto">
+										Added By: <span th:text="${topic.user.firstName}"></span> <span th:text="${topic.user.lastName}"></span>
+									</div>
+									<div class="col col-lg-2">
+										<a href="#">Edit</a> | <a href="#">Delete</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Comments:</h5>
+								<div class="card-text">
+									<div class="row">
+										<div class="col">
+											Test
+										</div>
+										<div class="col-md-auto">
+											Added By: <span></span> <span></span>
+										</div>
+										<div class="col col-lg-2">
+											<a href="#">Edit</a> | <a href="#">Delete</a>
+										</div>
+									</div>
+								</div>
+								<textarea style="width: 100%;" placeholder="Comments here"></textarea>
+								<a href="#" class="btn btn-primary pull-right">Save</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 	</div>
 </body>
 </html>

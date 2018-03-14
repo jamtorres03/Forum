@@ -2,6 +2,7 @@ package com.forum.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,23 +23,23 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "comment_id")
 	private int commentId;
-	
+
 	@Column(name = "content")
 	private String content;
-	
+
 	@Column(name = "status")
 	private int status;
-	
+
 	@Column(name = "created_by")
 	private String createdBy;
-	
-	@Column(name = "created_date", columnDefinition="DATETIME")
+
+	@Column(name = "created_date", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "topic_id")
-    private Topic topic;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "topic_id", nullable = false)
+	private Topic topic;
 
 	public int getCommentId() {
 		return commentId;
@@ -87,5 +88,4 @@ public class Comment {
 	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}
-	
 }

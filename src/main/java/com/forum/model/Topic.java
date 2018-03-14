@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,22 +26,23 @@ public class Topic {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "topic_id")
 	private int topicId;
-	
+
 	@Column(name = "subject")
 	private String subject;
-	
+
 	@Column(name = "status")
 	private int status;
-	
-	@Column(name = "created_by")
-	private String createdBy;
-	
-	@Column(name = "created_date", columnDefinition="DATETIME")
+
+	@Column(name = "created_date", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
-    private List<Comment> comments = new ArrayList<>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic", targetEntity = Comment.class)
+	private List<Comment> comments = new ArrayList<>();
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
 	public int getTopicId() {
 		return topicId;
@@ -64,14 +68,6 @@ public class Topic {
 		this.status = status;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -88,4 +84,11 @@ public class Topic {
 		this.comments = comments;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

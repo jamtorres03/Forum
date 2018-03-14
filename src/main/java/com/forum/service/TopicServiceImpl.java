@@ -1,6 +1,7 @@
 package com.forum.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,13 @@ public class TopicServiceImpl implements TopicService {
 		topicRepository.save(topic);
 	}
 
+	@Override
+	public List<Topic> findByStatus(int status) {
+		return topicRepository.findByStatus(status);
+	}
+
+	@Override
+	public Topic findByTopicId(int topicId) {
+		return topicRepository.findByTopicId(topicId);
+	}
 }

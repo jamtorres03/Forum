@@ -24,39 +24,28 @@
 					<span th:utext="${userName}"></span>
 				</div>
 				<div class="panel-body">
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-					  Add Topic
-					</button>
-					
-					<!-- Modal -->
-					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">Add Topic</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <form autocomplete="off" action="#" th:action="@{/admin/topic}" th:object="${topic}" method="post" role="form">
-						      <div class="modal-body">
-						      	  <label class="validation-message text-center mb-15" th:utext="${successMessage}"></label> 
-						          <div class="form-group">
-						          	<label th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="validation-message mb-15"></label>
-						            <label for="recipient-name" class="col-form-label">Subject:</label>
-						            <input type="text" placeholder="subject" th:field="*{subject}" id="subject" name="subject" class="form-control" data-placeholder="&#xf191;">
-						          </div>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						        <button type="Submit" class="btn btn-primary">Add Topic</button>
-						      </div>
-					      </form>
-					    </div>
-					  </div>
-					</div>
+					<form autocomplete="off" action="#" th:action="@{/admin/topic}"
+						th:object="${topic}" method="post"
+						class="login100-form validate-form" role="form">
+						<span class="login100-form-logo"> <i
+							class="zmdi zmdi-landscape"></i>
+						</span> <label class="validation-message text-center mb-15"
+							th:utext="${successMessage}"></label> <label
+							th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"
+							class="validation-message mb-15"></label>
+						<div class="wrap-input100 validate-input"
+							data-validate="Enter a valid subject">
+							<input type="text" placeholder="subject" th:field="*{subject}"
+								id="subject" name="subject" class="input100" /> <span
+								class="focus-input100" data-placeholder="&#xf191;"></span>
+						</div>
+
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn" type="Submit">Add Topic</button>
+						</div>
+					</form>
 				</div>
+				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
 			</div>
 		</div>
 

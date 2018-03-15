@@ -40,6 +40,10 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "topic_id", nullable = false)
 	private Topic topic;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
 	public int getCommentId() {
 		return commentId;
@@ -87,5 +91,13 @@ public class Comment {
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

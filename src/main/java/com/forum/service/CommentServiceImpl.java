@@ -1,6 +1,5 @@
 package com.forum.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void saveComment(Comment comment) {
-		comment.setStatus(1);
-		comment.setCreatedDate(new Date());
 		commentRepository.save(comment);
 	}
 

@@ -1,6 +1,5 @@
 package com.forum.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ public class TopicServiceImpl implements TopicService {
 
 	@Override
 	public void saveTopic(Topic topic) {
-		topic.setStatus(1);
-		topic.setCreatedDate(new Date());
 		topicRepository.save(topic);
 	}
 

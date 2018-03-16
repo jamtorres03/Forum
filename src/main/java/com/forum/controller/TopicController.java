@@ -1,5 +1,7 @@
 package com.forum.controller;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forum.model.Comment;
@@ -51,6 +54,8 @@ public class TopicController {
 			modelAndView.setViewName("admin/topic");
 		} else {
 			User user = userService.findUserByEmail(auth.getName());
+			topic.setStatus(1);
+			topic.setCreatedDate(new Date());
 			topic.setUser(user);
 			topicService.saveTopic(topic);
 			
@@ -77,6 +82,24 @@ public class TopicController {
 		modelAndView.setViewName("admin/topic");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="/admin/topic/delete", method = RequestMethod.POST)
+	public ModelAndView deleteTopic(@RequestParam int topicId) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		Topic topic = topicService.findByTopicId(topicId);
+		topic.setStatus(0);
+		topicService.saveTopic(topic);
+		
+		modelAndView.addObject("successMessage", "Successfully deleted.");
+		
+		modelAndView.addObject("topic", topic);
+		modelAndView.addObject("comment", new Comment());
+		modelAndView.addObject("topics", topicService.findByStatus(1));
+		modelAndView.addObject("comments", commentService.findByStatus(1));
+		modelAndView.setViewName("admin/topic");
+		return modelAndView;
+    }
 
 	@RequestMapping(value = "/admin/comment/{topicId}", method = RequestMethod.POST)
 	public ModelAndView addComment(@Valid Comment comment, @PathVariable(value = "topicId", required = false) int topicId, BindingResult bindingResult) {
@@ -91,7 +114,8 @@ public class TopicController {
 			
 			Topic topic = topicService.findByTopicId(topicId);
 			comment.setTopic(topic);
-			
+			comment.setStatus(1);
+			comment.setCreatedDate(new Date());
 			commentService.saveComment(comment);
 			
 			modelAndView.addObject("successMessage", "Successfully added.");

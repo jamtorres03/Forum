@@ -12,75 +12,22 @@
 
 <body>
 	<div class="container">
-
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Logout</button>
-		</form>
+		<div class="col-sm-2" style="float:right;">
+			<form th:action="@{/logout}" method="get">
+				<button class="btn btn-md btn-danger btn-block" name="registration" type="Submit">Logout</button>
+			</form>
+		</div>
 
 		<div class="panel-group" style="margin-top: 40px">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<span th:utext="${userName}"></span>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body col-sm-2">
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTopicModal">
 					  Add Topic
 					</button>
-					
-					<!-- Modal Add/Edit -->
-					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">Add Topic</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <form autocomplete="off" action="#" th:action="@{/admin/topic}" th:object="${topic}" method="post" role="form">
-						      <div class="modal-body">
-						      	  <label class="validation-message text-center mb-15" th:utext="${successMessage}"></label> 
-						          <div class="form-group">
-						          	<label th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="validation-message mb-15"></label>
-						            <label for="recipient-name" class="col-form-label">Subject:</label>
-						            <input type="text" placeholder="subject" th:field="*{subject}" id="subject" name="subject" class="form-control" data-placeholder="&#xf191;">
-						            <input type="hidden" placeholder="subject" th:field="*{topicId}" id="topicId" name="topicId" class="form-control" data-placeholder="&#xf191;">
-						          </div>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						        <button type="Submit" class="btn btn-primary" id="btn-add-topic">Add Topic</button>
-						      </div>
-					      </form>
-					    </div>
-					  </div>
-					</div>
-					
-					<!-- Modal Delete-->
-					<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLongTitle">Delete Topic</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        Are you sure you want to delete topic?
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <form th:action="@{/admin/topic/delete}" th:object="${topic}" method="post">
-					            <input type="hidden" th:field="${topic.topicId}" id="deleteTopicId" value=""/>
-					            <button type="submit" class="btn btn-primary">Delete</button>
-					        </form>
-					      </div>
-					    </div>
-					  </div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -99,27 +46,27 @@
 										<span th:text="${topic.subject}"></span>
 									</div>
 									<div class="col-md-auto">
-										Added By: <span th:text="${topic.user.firstName}"></span> <span th:text="${topic.user.lastName}"></span>
+										Added by: <span th:text="${topic.user.firstName}"></span> <span th:text="${topic.user.lastName}"></span>
 									</div>
-									<div class="col col-lg-2">
-										<a th:onclick="|editTopic('${topic.topicId}', '${topic.subject}')|" id="editTopic">Edit</a> |
-										<a th:onclick="|deleteTopic('${topic.topicId}', '${topic.subject}')|" id="deleteTopic">Delete</a>
+									<div class="col col-lg-2" th:if="${topic.user.id == loggedUser.id}">
+										<a href="#" th:onclick="|editTopic('${topic.topicId}', '${topic.subject}')|" id="editTopic">Edit</a> |
+										<a href="#" th:onclick="|deleteTopic('${topic.topicId}')|" id="deleteTopic">Delete</a>
 									</div>
 								</div>
 							</div>
 							<div class="card-body">
 								<h5 class="card-title">Comments:</h5>
 								<div class="card-text" style="margin-bottom: 10px;" th:each="comment : ${topic.comments}">
-									<div class="row">
+									<div th:if="${comment.status == 1}" class="row form-group">
 										<div class="col">
 											<span th:text="${comment.content}"></span>
 										</div>
 										<div class="col-md-auto">
-											Added By: <span th:text="${comment.user.firstName}"></span> <span th:text="${comment.user.lastName}"></span>
+											Added by: <span th:text="${comment.user.firstName}"></span> <span th:text="${comment.user.lastName}"></span>
 										</div>
-										<div class="col col-lg-2">
-											<a th:href="@{/admin/comment/edit/{commentId}(commentId=${comment.commentId})}">Edit</a> |
-											<a th:href="@{/admin/comment/delete/{commentId}(commentId=${comment.commentId})}">Delete</a>
+										<div class="col col-lg-2" th:if="${comment.user.id == loggedUser.id}">
+											<a href="#" th:onclick="|editComment('${comment.commentId}', '${comment.content}')|" id="editComment">Edit</a> |
+											<a href="#" th:onclick="|deleteComment('${comment.commentId}')|" id="deleteComment">Delete</a>
 										</div>
 									</div>
 								</div>
@@ -130,23 +77,144 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal Add/Edit Topic -->
+	<div class="modal fade" id="addTopicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Add Topic</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <form autocomplete="off" action="#" th:action="@{/admin/topic}" th:object="${topic}" method="post" role="form">
+		      <div class="modal-body">
+		          <div class="form-group">
+		          	<label th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="validation-message mb-15"></label>
+		            <label for="recipient-name" class="col-form-label">Subject</label>
+		            <input type="text" placeholder="Enter subject here..." th:field="*{subject}" id="subject" name="subject" class="form-control" data-placeholder="&#xf191;">
+		            <input type="hidden" placeholder="subject" th:field="*{topicId}" id="topicId" name="topicId" class="form-control" data-placeholder="&#xf191;">
+		          </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="Submit" class="btn btn-primary" id="btn-add-topic">Add Topic</button>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Modal Delete Topic -->
+	<div class="modal fade" id="deleteTopicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Delete Topic</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        Are you sure you want to delete topic?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <form th:action="@{/admin/topic/delete}" th:object="${topic}" method="post">
+	            <div class="form-group">
+	            	<input type="hidden" th:field="${topic.topicId}" id="deleteTopicId" value=""/>
+	            </div>
+	            <div class="form-group">
+	            	<button type="submit" class="btn btn-primary">Delete</button>
+	            </div>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Modal Add/Edit Comment -->
+	<div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <form autocomplete="off" action="#" th:action="@{/admin/comment/edit}" th:object="${comment}" method="post" role="form">
+		      <div class="modal-body">
+		          <div class="form-group">
+		          	<textarea style="width: 100%;" th:field="*{content}" id="contentEdit" name="content"  placeholder="Comments here"></textarea>
+		            <input type="hidden" th:field="*{commentId}" id="commentId" name="commentId" class="form-control" data-placeholder="&#xf191;">
+		          </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="Submit" class="btn btn-primary">Edit Comment</button>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Modal Delete Comment -->
+	<div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Delete Comment</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        Are you sure you want to delete comment?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <form th:action="@{/admin/comment/delete}" th:object="${comment}" method="post">
+	            <div class="form-group">
+	            	<input type="hidden" th:field="${comment.commentId}" id="deleteCommentId" value=""/>
+	            </div>
+	            <div class="form-group">
+	            	<button type="submit" class="btn btn-primary">Delete</button>
+	            </div>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 </body>
 <script>
 	function editTopic (topicId, subject) {
 		$("#topicId").val(topicId);
 		$("#subject").val(subject);
 		$("#btn-add-topic").html('Edit Topic');
-		$('#exampleModalCenter').modal('show');
+		$('#addTopicModal').modal('show');
 	}
 	
 	function deleteTopic (topicId) {
 		$("#deleteTopicId").val(topicId);
-		$('#deleteModal').modal('show');
+		$('#deleteTopicModal').modal('show');
+	}
+	
+	function editComment (commentId, content) {
+		$("#commentId").val(commentId);
+		$("#contentEdit").val(content);
+		$('#editCommentModal').modal('show');
+	}
+	
+	function deleteComment (commentId) {
+		$("#deleteCommentId").val(commentId);
+		$('#deleteCommentModal').modal('show');
 	}
 </script>
 </html>

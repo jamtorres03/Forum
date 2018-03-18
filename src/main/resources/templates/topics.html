@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Topics</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="panel-group" style="margin-top: 40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span th:utext="${userName}"></span>
+				</div>
+				<div class="panel-body col-sm-2">
+					<!-- Button trigger modal -->
+				</div>
+			</div>
+		</div>
+
+		<div class="panel-group" style="margin-top: 40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span th:utext="${userName}"></span>
+				</div>
+				<div class="panel-body">
+					<div class="container">
+						<div class="card" style="margin-bottom: 10px;" th:each="topic : ${topics}">
+							<div class="card-header">
+								<div class="row">
+									<div class="col">
+										<span th:text="${topic.subject}"></span>
+									</div>
+									<div class="col-md-auto">
+										Added by: <span th:text="${topic.user.firstName}"></span> <span th:text="${topic.user.lastName}"></span>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Comments:</h5>
+								<div class="card-text" style="margin-bottom: 10px;" th:each="comment : ${topic.comments}">
+									<div th:if="${comment.status == 1}" class="row form-group">
+										<div class="col">
+											<span th:text="${comment.content}"></span>
+										</div>
+										<div class="col-md-auto">
+											Added by: <span th:text="${comment.user.firstName}"></span> <span th:text="${comment.user.lastName}"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

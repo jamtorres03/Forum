@@ -2,96 +2,74 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Sign Up</title>
+	<title>Registration</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
-	<!-- <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"> -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<link rel='stylesheet' type="text/css" th:href="@{/font-awesome/css/font-awesome.min.css}">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100">
+<body class='registration-page'>
+	<div class='inner'>
+		<div class='wrapper'>
+			<div class='registration-wrap container'>
+				<div class='logo'></div>
+				<h2>Registration</h2>
 				<form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="login100-form validate-form" role="form">
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
-
-					<span class="login100-form-title p-b-34 p-t-27">
-						Sign Up
-					</span>
-					
 					<label class="validation-message text-center mb-15" th:utext="${successMessage}"></label>
 					
 					<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message mb-15"></label>
-					<div class="wrap-input100 validate-input" data-validate = "Enter a valid email">
-						<input type="email" id="email" name="email" th:field="*{email}" th:placeholder="Email" class="input100" />
+					<div class="form-group" data-validate = "Enter a valid email">
+						<input style="width:  100%;" type="email" id="email" name="email" th:field="*{email}" th:placeholder="Email" class="input100" />
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					
 					<label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message mb-15"></label>
-					<div class="wrap-input100 validate-input" data-validate="Enter a valid firstName">
-						<input type="text" placeholder="firstName" th:field="*{firstName}" id="firstName" name="firstName" class="input100" />
+					<div class="form-group" data-validate="Enter a valid firstName">
+						<input type="text" placeholder="Firstname" th:field="*{firstName}" id="firstName" name="firstName" class="input100" />
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 					
 					<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message mb-15"></label>
-					<div class="wrap-input100 validate-input" data-validate = "Enter a valid lastName">
-						<input type="text" id="lastName" name="lastName" th:field="*{lastName}" placeholder="lastName" class="input100" />
+					<div class="form-group" data-validate = "Enter a valid lastName">
+						<input type="text" id="lastName" name="lastName" th:field="*{lastName}" placeholder="Lastname" class="input100" />
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					
 					<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message mb-15"></label>
-					<div class="wrap-input100 validate-input" data-validate = "Enter a valid password">
+					<div class="form-group" data-validate = "Enter a valid password">
 						<input type="password" id="password" name="password" th:field="*{password}" placeholder="Password" class="input100" />
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					
 					<label th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="validation-message mb-15"></label>
-					<div class="wrap-input100 validate-input" data-validate = "Passwords do not match!">
+					<div class="form-group" data-validate = "Passwords do not match!">
 						<input type="password" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm Password" class="input100" />
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" type="Submit">
-							Sign Up
-						</button>
+					<div>
+						<input type='submit' value='Register' />
 					</div>
 
+					<br>
 					<div class="text-right p-t-90">
 						<a class="txt1" th:href="@{/login}">
 							Login
 						</a>
 					</div>
 				</form>
+
+				<!-- Message Box:  Hidden by default -->
+				<div class='message-error hide'><i class='fa fa-times'></i>Incorrect Password! Please try again.</div>
+				<p class='copyright'>All rights reserved. 2014</p>
 			</div>
 		</div>
+		<!-- End of .wrapper -->
 	</div>
-	
-
-	<div id="dropDownSelect1"></div>
-	
-	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
-	<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
-	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
-	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{/vendor/select2/select2.min.js}"></script>
-	<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
-	<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
-	<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
-	<script th:src="@{/js/main.js}"></script>
-
+	<!-- End of .inner -->
 </body>
 </html>

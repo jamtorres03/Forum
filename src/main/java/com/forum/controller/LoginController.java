@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forum.model.User;
+import com.forum.service.TopicService;
 import com.forum.service.UserService;
 
 @Controller
@@ -18,6 +19,9 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private TopicService topicService;
+	
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
@@ -31,6 +35,14 @@ public class LoginController {
 		User user = new User();
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("registration");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/topics", method = RequestMethod.GET)
+	public ModelAndView topics(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("topics", topicService.findByStatus(1));
+		modelAndView.setViewName("topics");
 		return modelAndView;
 	}
 	
@@ -51,6 +63,8 @@ public class LoginController {
 					modelAndView.addObject("user", new User());
 					modelAndView.setViewName("registration");
 				}
+			} else {
+				bindingResult.rejectValue("confirmPassword", "error.user", "Password does not match!");
 			}
 		}
 		return modelAndView;

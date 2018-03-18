@@ -5,78 +5,39 @@
 	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
-	<!-- <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"> -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<link rel='stylesheet' type="text/css" th:href="@{/font-awesome/css/font-awesome.min.css}">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100">
-				<form th:action="@{/login}" method="POST" class="login100-form validate-form">
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
+<body class='login-page'>
+	<div class='inner'>
+		<div class='wrapper'>
+			<div class='login-wrap container right'>
+				<div class='logo'></div>
+				<form th:action="@{/login}" method='POST'>
+					<span class='field-icon' data-title='username'><i class='fa fa-user'></i></span>
+					<input type="text" id="email" name="email"  th:placeholder="Username" class="input100" />
 
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
-					</span>
-
-					<label th:if="${param.error}" class="validation-message text-center mb-15">Email or Password is invalid.</label>
-					<div class="wrap-input100 validate-input" data-validate = "Enter a valid email">
-						<input type="text" id="email" name="email"  th:placeholder="Email" class="input100" />
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input type="password"  th:placeholder="Password" id="password" name="password" class="input100" />
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" type="Submit">
-							Login
-						</button>
-					</div>
-
-					<div class="text-right p-t-90">
-						<a class="txt1" th:href="@{/registration}">
-							Sign Up
-						</a>
-					</div>
+					<span class='field-icon'><i class='fa fa-lock'></i></span>
+					<input type="password"  th:placeholder="Password" id="password" name="password" class="input100" />
 					
-					<div class="text-right">
-						<a class="txt1" th:href="@{/forgot}">
-							Forgot Password
-						</a>
-					</div>
+					<input type='submit' value='Sign In' />
 				</form>
+				<div class="text-right p-t-90">
+					<a class="txt1" th:href="@{/registration}">
+						Sign Up
+					</a>
+				</div>
+				
+				<p class='copyright'>All rights reserved. 2018</p>
 			</div>
+
 		</div>
+		<!-- End of .wrapper -->
 	</div>
-	
-
-	<div id="dropDownSelect1"></div>
-	
-	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
-	<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
-	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
-	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{/vendor/select2/select2.min.js}"></script>
-	<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
-	<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
-	<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
-	<script th:src="@{/js/main.js}"></script>
-
+	<!-- End of .inner -->
 </body>
 </html>

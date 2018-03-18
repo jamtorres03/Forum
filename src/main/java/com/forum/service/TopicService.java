@@ -10,4 +10,6 @@ public interface TopicService {
 	public Topic findByTopicId(int topicId);
 	
 	public List<Topic> findByStatus(int status);
+	
+	public List<Topic> findAllByStatus();
 }
